@@ -6,13 +6,23 @@ public  class ViajeroNacional extends Viajero {
 
     private String departamento;
     private String ciudad;
-    private String frecuencia;
+    private int frecuencia;
 
     public ViajeroNacional() {
     }
 
     @Override
     public void reservar(String metodoPago, int puntosFidelidad) {
+        System.out.println("Estamos iniciando tu reserva");
+
+        if (this.frecuencia < 10) {
+            System.out.println("Puntos de fidelidad no disponibles. Necesita al menos 10 reservas previas.");
+            puntosFidelidad = 0;
+        } else if (puntosFidelidad > 0) {
+            System.out.println("aplicando" + puntosFidelidad + "puntos de fidelidad");
+        }else {
+            System.out.println("No se han aplicado puntos de fidelidad");
+        }
 
     }
 
@@ -24,7 +34,7 @@ public  class ViajeroNacional extends Viajero {
 
     public ViajeroNacional(String nombreUsuar, int numDoc, String email, int telefono, String preferencias,
                            String metodoPago, int puntosFidelidad, LocalDate fechaRegistro, String departamento,
-                           String ciudad, String frecuencia) {
+                           String ciudad, int frecuencia) {
         super(nombreUsuar, numDoc, email, telefono, preferencias, metodoPago, puntosFidelidad, fechaRegistro);
         this.departamento = departamento;
         this.ciudad = ciudad;
@@ -47,11 +57,11 @@ public  class ViajeroNacional extends Viajero {
         this.ciudad = ciudad;
     }
 
-    public String getFrecuencia() {
+    public int getFrecuencia() {
         return frecuencia;
     }
 
-    public void setFrecuencia(String frecuencia) {
+    public void setFrecuencia(int frecuencia) {
         this.frecuencia = frecuencia;
     }
 
