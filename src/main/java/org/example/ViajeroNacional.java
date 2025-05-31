@@ -28,7 +28,13 @@ public  class ViajeroNacional extends Viajero {
 
     @Override
     public double calcularDescuento(String metodoPago, int puntosFidelidad) {
-        return 0;
+        double valorBaseDelViaje = 1000.0; //Ejemplo fijado en 100
+            double descuentoPuntos = (this.frecuencia >=10) ? puntosFidelidad * 1.0 : 0.0; //cada punto de fidelidad vale 1 - 0.0 si no cumple la condición
+            double descuentoMetodo = metodoPago.equalsIgnoreCase("tarjeta") ? valorBaseDelViaje * 0.05 : 0.0; //aplica un descuento del 5% de valor de viaje - Si pago con tarjeta descuento el 5% de 1000.0
+
+            double descuenTotal = descuentoPuntos + descuentoMetodo; //suma los dos tipos de descuento fidelidad y metodo de pago
+
+            return Math.min(descuenTotal, valorBaseDelViaje); //devuelve el mínimo entre a y b
     }
 
 
